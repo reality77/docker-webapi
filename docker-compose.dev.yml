@@ -12,10 +12,21 @@ services:
         deploy:
             restart_policy:
                 condition: on-failure
-        ports:
-            - "80:80"
         depends_on:
             - appdb
+        networks:
+            - backnet
+
+    # SERVICE reverseproxy
+    nginx:
+        image: rproxy
+        deploy:
+            restart_policy:
+                condition: on-failure
+        ports:
+            - "80:80"
+        links:
+            - webapi
         networks:
             - backnet
 

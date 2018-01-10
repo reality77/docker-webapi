@@ -1,14 +1,20 @@
 # Mode test
 
-## Construction de l'image
+## Construction des images
 
-`sudo docker build -t webapi .`
+### Image webapi
+
+`docker build -t webapi .`
+
+### Image rproxy (nginx)
+
+`docker build -t rproxy .`
 
 ## Execution
 
 - Avant l'éxécution, lancer le container postgresql de test (base vide)
 
-`sudo docker run -it -e POSTGRES_USER=webapi -e POSTGRES_PASSWORD=mypostgrespassword! -p 5432:5432 postgre`
+`sudo docker run -it -e POSTGRES_USER=webapi -e POSTGRES_PASSWORD=mypostgrespassword! -p 5432:5432 postgres`
 
 - Exécution de notre container web
 
@@ -33,13 +39,13 @@ option `-d`pour démarrer en détaché
 
 Pour déployer le swarm :
 
-`sudo docker swarm init`
+`docker swarm init`
 
-`sudo docker stack deploy -c docker-compose.dev.yml webstack`
+`docker stack deploy -c docker-compose.dev.yml webstack`
 
 Attention : pour le moment, les données de la base ne sont pas persistentes
 
 Pour le quitter :
 
-`sudo docker swarm leave --force`
+`docker swarm leave --force`
 
